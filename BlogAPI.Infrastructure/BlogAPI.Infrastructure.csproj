@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Configurations\" />
     <Folder Include="Mapping\" />
     <Folder Include="Services\" />
     <Folder Include="UnitOfWork\" />
