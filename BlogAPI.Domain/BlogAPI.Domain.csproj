@@ -13,8 +13,6 @@
     <Folder Include="Entities\" />
     <Folder Include="Interfaces\Repositories\" />
     <Folder Include="Interfaces\Services\" />
-    <Folder Include="Common\" />
-    <Folder Include="Wrappers\" />
   </ItemGroup>
 
   <ItemGroup>
