@@ -6,3 +6,8 @@ global using BlogAPI.Infrastructure.Data;
 global using BlogAPI.Infrastructure.Repositories;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Riok.Mapperly.Abstractions;
+global using BlogAPI.Domain.DTOs;
+global using BlogAPI.Domain.DTOs.Posts;
+global using BlogAPI.Domain.DTOs.Comments;
+global using BlogAPI.Infrastructure.Mapping;
