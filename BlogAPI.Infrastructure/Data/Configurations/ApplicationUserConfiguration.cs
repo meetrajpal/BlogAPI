@@ -1,8 +1,4 @@
-﻿using BlogAPI.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace BlogAPI.Infrastructure.Data.Configurations;
+﻿namespace BlogAPI.Infrastructure.Data.Configurations;
 
 public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {

@@ -11,7 +11,6 @@
     <Folder Include="DTOs\Comments\" />
     <Folder Include="DTOs\Posts\" />
     <Folder Include="Entities\" />
-    <Folder Include="Interfaces\Repositories\" />
     <Folder Include="Interfaces\Services\" />
   </ItemGroup>
 
