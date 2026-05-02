@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BlogAPI.API/BlogAPI.API.csproj" />
+  <Project Path="BlogAPI.Domain/BlogAPI.Domain.csproj" Id="c4f646fb-02b9-48d2-9f72-93abe9d09143" />
+  <Project Path="BlogAPI.Infrastructure/BlogAPI.Infrastructure.csproj" Id="690ca9a0-6244-4b47-a035-426711547527" />
+</Solution>
