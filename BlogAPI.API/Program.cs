@@ -1,14 +1,45 @@
-using BlogAPI.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
+using BlogAPI.API.Extensions;
+using BlogAPI.API.Middleware;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.AddSerilogLogging();
+
+// db
+builder.Services.AddDatabase(builder.Configuration);
+
+// identity
+builder.Services.AddIdentityServices();
+
+// jwt
+builder.Services.AddJwtAuthentication(builder.Configuration);
+
+// policies
+builder.Services.AddAuthorizationPolicies();
+
+// services
+builder.Services.AddApplicationServices();
+
+// redis
+builder.Services.AddRedisCache(builder.Configuration);
+
+// api versioning
+builder.Services.AddApiVersioningServices();
+
 
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwagger();
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseSwaggerWithVersioning();
+app.UseSerilogRequestLogging();
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
+
 app.Run();

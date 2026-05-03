@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Reflection;
 
 namespace BlogAPI.Infrastructure.Data;
@@ -16,6 +15,30 @@ public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        modelBuilder.Entity<IdentityRole<Guid>>().HasData(
+    new IdentityRole<Guid>
+    {
+        Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+        Name = "Admin",
+        NormalizedName = "ADMIN",
+        ConcurrencyStamp = "1"
+    },
+    new IdentityRole<Guid>
+    {
+        Id = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+        Name = "Author",
+        NormalizedName = "AUTHOR",
+        ConcurrencyStamp = "2"
+    },
+    new IdentityRole<Guid>
+    {
+        Id = Guid.Parse("33333333-3333-3333-3333-333333333333"),
+        Name = "Reader",
+        NormalizedName = "READER",
+        ConcurrencyStamp = "3"
+    }
+);
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
