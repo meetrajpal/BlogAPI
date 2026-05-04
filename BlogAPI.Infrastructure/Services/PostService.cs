@@ -23,9 +23,7 @@ public class PostService : IPostService
 
     public async Task<PagedResponse<List<PostDto>>> GetAllPostsAsync(PaginationFilter filter)
     {
-        var cacheKey = $"{AllPostsCacheKey}:{filter.PageNumber}:{filter.PageSize}";
-
-        var cached = await _cacheService.GetAsync<PagedResponse<List<PostDto>>>(cacheKey);
+        var cached = await _cacheService.GetAsync<PagedResponse<List<PostDto>>>(AllPostsCacheKey);
         if (cached != null)
             return cached;
 
@@ -45,7 +43,7 @@ public class PostService : IPostService
             result.TotalRecords,
             "Posts fetched successfully.");
 
-        await _cacheService.SetAsync(cacheKey, response, TimeSpan.FromMinutes(5));
+        await _cacheService.SetAsync(AllPostsCacheKey, response, TimeSpan.FromMinutes(5));
 
         return response;
     }

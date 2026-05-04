@@ -1,6 +1,5 @@
 using BlogAPI.API.Extensions;
-using BlogAPI.API.Middleware;
-using Serilog;
+using BlogAPI.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,12 +29,12 @@ builder.Services.AddApiVersioningServices();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwagger();
+builder.Services.AddOpenApiService();
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseSwaggerWithVersioning();
+app.UseScalarWithVersioning();
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthentication();

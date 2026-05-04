@@ -29,4 +29,27 @@ public class PostRepository : BaseRepository<Post>, IPostRepository
     {
         return await _dbSet.AnyAsync(p => p.Slug == slug && !p.IsDeleted);
     }
+
+    public new async Task<PagedResponse<List<Post>>> GetAllAsync(PaginationFilter filter)
+    {
+        var totalRecords = await _dbSet.CountAsync(e => !e.IsDeleted);
+
+        var data = await _dbSet
+            .Include(p => p.Author)
+            .Include(p => p.Comments)
+            .Where(e => !e.IsDeleted)
+            .Skip((filter.PageNumber - 1) * filter.PageSize)
+            .Take(filter.PageSize)
+            .ToListAsync();
+
+        return PagedResponse<List<Post>>.Success(data, filter.PageNumber, filter.PageSize, totalRecords);
+    }
+
+    public new async Task<Post?> GetByIdAsync(Guid id)
+    {
+        return await _dbSet
+            .Include(p => p.Author)
+            .Include(p => p.Comments)
+            .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
+    }
 }

@@ -1,11 +1,4 @@
-﻿using Asp.Versioning;
-using BlogAPI.Domain.DTOs.Auth;
-using BlogAPI.Domain.Wrappers;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-namespace BlogAPI.API.Controllers.v1;
+﻿namespace BlogAPI.API.Controllers.v1;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/auth")]

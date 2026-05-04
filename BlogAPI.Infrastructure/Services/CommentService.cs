@@ -22,9 +22,7 @@ public class CommentService : ICommentService
 
     public async Task<PagedResponse<List<CommentDto>>> GetCommentsByPostAsync(Guid postId, PaginationFilter filter)
     {
-        var cacheKey = $"{CommentCachePrefix}post:{postId}:{filter.PageNumber}:{filter.PageSize}";
-
-        var cached = await _cacheService.GetAsync<PagedResponse<List<CommentDto>>>(cacheKey);
+        var cached = await _cacheService.GetAsync<PagedResponse<List<CommentDto>>>(CommentCachePrefix);
         if (cached != null)
             return cached;
 
@@ -41,7 +39,7 @@ public class CommentService : ICommentService
             result.TotalRecords,
             "Comments fetched successfully.");
 
-        await _cacheService.SetAsync(cacheKey, response, TimeSpan.FromMinutes(5));
+        await _cacheService.SetAsync(CommentCachePrefix, response, TimeSpan.FromMinutes(5));
 
         return response;
     }

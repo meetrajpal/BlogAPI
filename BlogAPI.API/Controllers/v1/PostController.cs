@@ -1,10 +1,4 @@
-﻿using Asp.Versioning;
-using BlogAPI.Domain.DTOs.Posts;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-namespace BlogAPI.API.Controllers.v1;
+﻿namespace BlogAPI.API.Controllers.v1;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/posts")]

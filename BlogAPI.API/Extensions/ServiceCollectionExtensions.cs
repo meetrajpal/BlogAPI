@@ -66,20 +66,15 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddAuthorizationPolicies(this IServiceCollection services)
     {
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy("CanCreatePost", policy =>
-                policy.RequireRole("Author", "Admin"));
-
-            options.AddPolicy("CanDeleteAnyPost", policy =>
-                policy.RequireClaim("permission", "post:delete_any"));
-
-            options.AddPolicy("CanModerateComments", policy =>
-                policy.RequireRole("Admin"));
-
-            options.AddPolicy("VerifiedAuthorOnly", policy =>
+        services.AddAuthorizationBuilder()
+            .AddPolicy("CanCreatePost", policy =>
+                policy.RequireRole("Author", "Admin"))
+            .AddPolicy("CanDeleteAnyPost", policy =>
+                policy.RequireClaim("permission", "post:delete_any"))
+            .AddPolicy("CanModerateComments", policy =>
+                policy.RequireRole("Admin"))
+            .AddPolicy("VerifiedAuthorOnly", policy =>
                 policy.RequireClaim("IsVerifiedAuthor", "true"));
-        });
 
         return services;
     }
