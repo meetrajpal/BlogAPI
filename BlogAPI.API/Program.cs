@@ -29,12 +29,12 @@ builder.Services.AddApiVersioningServices();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApiService();
+builder.Services.AddSwaggerExtention();
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseScalarWithVersioning();
+app.UseSwaggerWithVersioning();
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthentication();

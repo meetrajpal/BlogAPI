@@ -7,11 +7,13 @@ public class PostsController : ControllerBase
 {
     private readonly IPostService _postService;
 
+
     public PostsController(IPostService postService)
     {
         _postService = postService;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter)
     {
